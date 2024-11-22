@@ -25,7 +25,8 @@ public class JobController {
 
     // GET /jobs/{id} : Get a specific job by ID
     @GetMapping("/{id}") // id is dynamic we are passing runtime
-    public ResponseEntity<Job> getSingleJob(@PathVariable long id){ // pathvariable extract the values from the URI and add with method parameter
+    public ResponseEntity<Job> getSingleJob(@PathVariable long id){
+        // pathvariable extract the values from the URI and add with method parameter
         Job job = jobService.getById(id);
         if(job!=null){
             return new ResponseEntity<>(job, HttpStatus.OK);
@@ -44,6 +45,13 @@ public class JobController {
 
 
     // DELETE /jobs/{id} : Delete a specific job by ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteJob(@PathVariable Long id){
+        boolean delete = jobService.deleteJob(id);
+        if(delete)
+            return  new ResponseEntity<>("Job deleted successfully",HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
     // PUT /jobs/{id} : Update a specific job by ID(request body should contain the updated jobs)
 
 
