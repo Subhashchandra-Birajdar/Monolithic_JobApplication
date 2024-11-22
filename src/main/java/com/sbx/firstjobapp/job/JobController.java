@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/jobs")
+@RequestMapping("/jobs") // used at method level or class level, used as base URL for all URI
 public class JobController {
 
     private JobService jobService;
@@ -18,7 +18,8 @@ public class JobController {
     }
 
     // GET  /jobs/all-jobs : get all jobs
-    @GetMapping("/all-jobs")
+    //@GetMapping("/all-jobs") -- Specialise version of request mapping
+    @RequestMapping(value = "/all-jobs",method=RequestMethod.GET)
     public ResponseEntity<List<Job>> findAll(){
         return new ResponseEntity<>(jobService.findAll(),HttpStatus.OK);
     }
@@ -53,7 +54,14 @@ public class JobController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     // PUT /jobs/{id} : Update a specific job by ID(request body should contain the updated jobs)
-
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateJob(@PathVariable Long id,
+                                            @RequestBody Job updateJob){
+        Boolean updated = jobService.updateJob(id,updateJob);
+        if(updated)
+            return new ResponseEntity<>("Job is updated",HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 
     // tools use JSONLint : to create JSON

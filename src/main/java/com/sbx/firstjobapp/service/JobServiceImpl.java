@@ -47,4 +47,20 @@ public class JobServiceImpl implements JobService{
         }
         return false;
     }
-}
+
+    @Override
+    public Boolean updateJob(Long id, Job updateJob) {
+        for (Job job:jobs) {
+            if(job.getId().equals(id)){
+                job.setTitle(updateJob.getTitle());
+                job.setDescription(updateJob.getDescription());
+                job.setMinSalary(updateJob.getMinSalary());
+                job.setMaxSalary(updateJob.getMaxSalary());
+                job.setLocation(updateJob.getLocation());
+                jobs.add(job);
+                return true;
+            }
+        }
+        return false;
+    }
+} // in realtime id is an unique identifier like in bank customer id not update
