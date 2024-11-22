@@ -1,5 +1,6 @@
 package com.sbx.firstjobapp.job;
 
+import com.sbx.firstjobapp.job.service.JobService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -9,19 +10,23 @@ import java.util.List;
 @RequestMapping("/jobs")
 public class JobController {
 
-    private List<Job> jobs = new ArrayList<>();
+    private JobService jobService;
+
+    public JobController(JobService jobService) {
+        this.jobService = jobService;
+    }
 
     // GET  /jobs/all-jobs : get all jobs
     @GetMapping("/all-jobs")
     public List<Job> findAll(){
-        return jobs;
+        return jobService.findAll();
     }
 
     // GET /jobs/{id} : Get a specific job by ID
     // POST /jobs : Create a new jon(request body should contain the job details)
     @PostMapping
     public String createJob(@RequestBody Job job){
-        jobs.add(job);
+        jobService.createJob(job);
         return "Job added successfully";
     }
 
