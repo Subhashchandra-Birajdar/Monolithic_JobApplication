@@ -1,4 +1,4 @@
-package com.sbx.firstjobapp.job.service;
+package com.sbx.firstjobapp.service;
 
 import com.sbx.firstjobapp.job.Job;
 
@@ -8,4 +8,6 @@ public interface JobService {
     // created interface for loose coupling
     List<Job> findAll();
     void createJob(Job job);
+
+    Job getById(long id);
 }

@@ -8,14 +8,14 @@ public class Job {
 
     private String description;
 
-    private String minSalary;
-    private String maxSalary; // for duplicate this line select and use ctrl+d is will duplicate
+    private Long minSalary;
+    private Long maxSalary; // for duplicate this line select and use ctrl+d is will duplicate
     private String location;
 
     public Job() {
     }
 
-    public Job(Long id, String title, String description, String minSalary, String maxSalary, String location) {
+    public Job(Long id, String title, String description, Long minSalary, Long maxSalary, String location) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -48,19 +48,19 @@ public class Job {
         this.description = description;
     }
 
-    public String getMinSalary() {
+    public Long getMinSalary() {
         return minSalary;
     }
 
-    public void setMinSalary(String minSalary) {
+    public void setMinSalary(Long minSalary) {
         this.minSalary = minSalary;
     }
 
-    public String getMaxSalary() {
+    public Long getMaxSalary() {
         return maxSalary;
     }
 
-    public void setMaxSalary(String maxSalary) {
+    public void setMaxSalary(Long maxSalary) {
         this.maxSalary = maxSalary;
     }
 
